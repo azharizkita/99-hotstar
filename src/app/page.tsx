@@ -1,5 +1,6 @@
 import { Flex } from "@/components/base";
-import { spacing } from "@/styles/utils";
+import GetStartedButton from "@/components/GetStartedButton";
+import { contentSafeAreaStyles, spacing } from "@/styles/utils";
 
 export default function Home() {
   return (
@@ -7,9 +8,8 @@ export default function Home() {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        padding: spacing(8),
-        paddingLeft: spacing(21),
         gap: spacing(4),
+        ...contentSafeAreaStyles,
       }}
     >
       <Flex style={{ flexGrow: 0, alignItems: "center", lineHeight: "30px" }}>
@@ -24,6 +24,7 @@ export default function Home() {
         interface. Discover blockbusters, classics, and hidden gems in a
         user-friendly environment crafted for movie enthusiasts.
       </p>
+      <GetStartedButton />
     </Flex>
   );
 }
