@@ -6,19 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
   },
   "dependencies": {
+    "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.4"
+    "react-dom": "^18"
+  },
+  "lint-staged": {
+    "*.{json,js,ts,jsx,tsx,html,md}": [
+      "pnpm format"
+    ]
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@next/bundle-analyzer": "^14.2.4",
+    "@serwist/next": "^9.0.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "eslint-config-next": "14.2.4",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "serwist": "^9.0.3",
+    "typescript": "^5"
   }
 }

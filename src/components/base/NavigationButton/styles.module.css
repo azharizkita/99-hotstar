@@ -1,0 +1,67 @@
+.navWrapper {
+  color: var(--secondary-glow);
+  transition: all 300ms ease-in-out;
+}
+
+.navWrapper.active {
+  color: var(--primary-glow);
+}
+
+.navWrapperHover {
+  color: var(--primary-glow);
+  transform: scale(1.1);
+}
+
+.navIcon {
+  fill: var(--secondary-glow);
+  transition: all 300ms ease-in-out;
+}
+
+.navIcon.active {
+  fill: var(--primary-glow);
+}
+
+.navIconHover {
+  filter: drop-shadow(0 0 10px #fff);
+  fill: var(--primary-glow);
+}
+
+.navTitle {
+  position: absolute;
+  left: 2.5em;
+  color: inherit;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    display: none;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    display: initial;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    display: initial;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    display: none;
+    transform: translateX(-10px);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 300ms forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 300ms forwards;
+}
