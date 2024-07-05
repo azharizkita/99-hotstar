@@ -5,11 +5,19 @@ import {
   getLocalStorageData,
   setLocalStorageData,
 } from "../../utils/local-storage";
-import {
+import type {
   WatchlistContextType,
-  initialWatchlistState,
   WatchlistItem,
+  WatchlistData,
 } from "./types";
+
+const initialWatchlistState: WatchlistContextType = {
+  watchlistCount: 0,
+  watchlist: {},
+  addToWatchlist: () => {},
+  removeFromWatchlist: () => {},
+  clearWatchlist: () => {},
+};
 
 export const WatchlistContext = createContext<WatchlistContextType>(
   initialWatchlistState,
@@ -31,9 +39,12 @@ export const WatchlistProvider = ({ children }: { children: ReactNode }) => {
 
   const addToWatchlist = (item: WatchlistItem) => {
     setWatchlist((prevWatchlist) => {
-      const newWatchlist = {
+      const newWatchlist: WatchlistData = {
         ...prevWatchlist,
-        [item.id.toString()]: item,
+        [item.id.toString()]: {
+          ...item,
+          timestamp: Date.now(),
+        },
       };
       setLocalStorageData("watchlist", newWatchlist);
       return newWatchlist;

@@ -9,6 +9,7 @@ import {
   titleStyles,
 } from "./styles";
 import { ActionButton } from "./ActionButton";
+import type { WatchlistItem } from "@/context/watchlist-storage/types";
 
 interface CardProps extends HTMLAttributes<HTMLElement> {
   imageUrl: string;
@@ -29,6 +30,14 @@ const Card = (props: CardProps) => {
     description = "-",
     ...rest
   } = props;
+
+  const watchListProps: WatchlistItem = {
+    description,
+    id,
+    imageUrl,
+    title,
+    type,
+  };
 
   return (
     <article style={cardStyle} className={styles.card} {...rest}>
@@ -57,7 +66,7 @@ const Card = (props: CardProps) => {
         <p style={titleStyles}>{title}</p>
         <p style={descriptionTextStyles}>{description}</p>
       </Flex>
-      <ActionButton id={id} type={type} />
+      <ActionButton watchListProps={watchListProps} />
     </article>
   );
 };

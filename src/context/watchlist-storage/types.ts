@@ -1,21 +1,18 @@
 export interface WatchlistItem {
-  timestamp: number;
+  timestamp?: number;
   id: number;
+  imageUrl: string;
+  title: string;
+  description: string;
   type: "tv" | "movie";
 }
 
+export type WatchlistData = { [key: string]: WatchlistItem };
+
 export interface WatchlistContextType {
   watchlistCount: number;
-  watchlist: { [key: string]: WatchlistItem };
+  watchlist: WatchlistData;
   addToWatchlist: (item: WatchlistItem) => void;
   removeFromWatchlist: (id: number) => void;
   clearWatchlist: () => void;
 }
-
-export const initialWatchlistState: WatchlistContextType = {
-  watchlistCount: 0,
-  watchlist: {},
-  addToWatchlist: () => {},
-  removeFromWatchlist: () => {},
-  clearWatchlist: () => {},
-};

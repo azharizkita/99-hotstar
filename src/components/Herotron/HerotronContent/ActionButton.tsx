@@ -1,9 +1,9 @@
 "use client";
 
+import { Flex } from "@/components/base";
+import Button from "@/components/base/Button";
+import { buttonContainerStyle } from "../styles";
 import { PlaylistAddIcon } from "@/Icons";
-import Button from "../base/Button";
-import styles from "./styles.module.css";
-import { hoverCircleStyle } from "./styles";
 import { use } from "react";
 import { WatchlistContext } from "@/context/watchlist-storage";
 import PlaylistRemoveIcon from "@/Icons/PlaylistRemoveIcon";
@@ -22,18 +22,29 @@ export const ActionButton = (props: { watchListProps: WatchlistItem }) => {
     }
     removeFromWatchlist(watchListProps.id);
   };
-
   return (
-    <Button
-      onClick={handleClick}
-      className={styles.hoverCircle}
-      style={hoverCircleStyle}
-    >
-      {isExistInWatchlist ? (
-        <PlaylistRemoveIcon fill="red" />
-      ) : (
-        <PlaylistAddIcon fill="black" />
-      )}
-    </Button>
+    <Flex style={buttonContainerStyle}>
+      <Button
+        variant="translucent"
+        style={{ width: "100%" }}
+        aria-label="More details"
+      >
+        More details
+      </Button>
+      <Button
+        variant="translucent"
+        style={{ width: "fit-content" }}
+        aria-label="Watch list"
+        onClick={handleClick}
+      >
+        {isExistInWatchlist ? (
+          <PlaylistRemoveIcon width="1.5em" height="1.5em" />
+        ) : (
+          <PlaylistAddIcon width="1.5em" height="1.5em" />
+        )}
+      </Button>
+    </Flex>
   );
 };
+
+export default ActionButton;
