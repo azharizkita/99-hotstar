@@ -22,9 +22,12 @@ export const WatchlistProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const storedWatchlist = getLocalStorageData("watchlist");
-    if (!storedWatchlist) return;
-    setWatchlist(storedWatchlist);
+    if (storedWatchlist) {
+      setWatchlist(storedWatchlist);
+    }
   }, []);
+
+  const watchlistCount = Object.keys(watchlist).length;
 
   const addToWatchlist = (item: WatchlistItem) => {
     setWatchlist((prevWatchlist) => {
@@ -53,7 +56,13 @@ export const WatchlistProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <WatchlistContext.Provider
-      value={{ watchlist, addToWatchlist, removeFromWatchlist, clearWatchlist }}
+      value={{
+        watchlist,
+        watchlistCount,
+        addToWatchlist,
+        removeFromWatchlist,
+        clearWatchlist,
+      }}
     >
       {children}
     </WatchlistContext.Provider>

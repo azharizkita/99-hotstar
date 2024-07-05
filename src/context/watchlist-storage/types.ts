@@ -5,6 +5,7 @@ export interface WatchlistItem {
 }
 
 export interface WatchlistContextType {
+  watchlistCount: number;
   watchlist: { [key: string]: WatchlistItem };
   addToWatchlist: (item: WatchlistItem) => void;
   removeFromWatchlist: (id: number) => void;
@@ -12,6 +13,7 @@ export interface WatchlistContextType {
 }
 
 export const initialWatchlistState: WatchlistContextType = {
+  watchlistCount: 0,
   watchlist: {},
   addToWatchlist: () => {},
   removeFromWatchlist: () => {},

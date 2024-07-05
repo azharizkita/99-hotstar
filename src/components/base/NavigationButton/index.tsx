@@ -1,11 +1,12 @@
 "use client";
 
 import Link, { type LinkProps } from "next/link";
-import { useState, useEffect, type CSSProperties, type FC } from "react";
+import { useState, useEffect, type CSSProperties, type FC, use } from "react";
 import { usePathname } from "next/navigation";
 import { NAVIGATION_ICON, NavigationCandidates } from "@/constants/navigation";
 import styles from "./styles.module.css";
 import { navigationButtonStyles } from "./styles";
+import { WatchlistContext } from "@/context/watchlist-storage";
 
 interface NavigationButtonProps {
   title?: string;
@@ -27,6 +28,7 @@ const NavigationButton: FC<INavigationButton> = ({
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
+  const { watchlistCount } = use(WatchlistContext);
 
   useEffect(() => {
     if (expand) {
@@ -41,18 +43,31 @@ const NavigationButton: FC<INavigationButton> = ({
     <Link
       aria-label={title}
       href={href}
-      className={`${styles.navWrapper} ${isHovered ? styles.navWrapperHover : ""} ${isActive ? styles.active : ""}`}
+      className={`${styles.navWrapper} ${
+        isHovered ? styles.navWrapperHover : ""
+      } ${isActive ? styles.active : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ ...navigationButtonStyles, ...style }}
       {...restProps}
     >
-      <Icon
-        className={`${styles.navIcon} ${isHovered ? styles.navIconHover : ""} ${isActive ? styles.active : ""}`}
-      />
+      <div className={styles.navIconWrapper}>
+        <Icon
+          className={`${styles.navIcon} ${
+            isHovered ? styles.navIconHover : ""
+          } ${isActive ? styles.active : ""}`}
+        />
+        <div
+          className={`${styles.watchlistBadge} ${watchlistCount > 0 && href === "/watchlist" ? styles.expand : ""}`}
+        >
+          <span>{watchlistCount}</span>
+        </div>
+      </div>
       {title && shouldAnimate && (
         <p
-          className={`${styles.navTitle} ${expand ? styles.fadeIn : styles.fadeOut}`}
+          className={`${styles.navTitle} ${
+            expand ? styles.fadeIn : styles.fadeOut
+          }`}
         >
           {title}
         </p>
