@@ -1,14 +1,20 @@
 import { fetchData } from "@/app/utils";
 import type { MovieItem } from "../types";
 
-const getMovies = async () => {
+export const getMovies = async () => {
   const result = await fetchData<MovieItem[]>({
-    destination: "discover/movie",
-    query:
-      "include_adult=true&include_null_first_air_dates=false&page=1&sort_by=vote_count.desc",
+    destination: "movie/top_rated",
+    query: "page=1",
   });
 
   return result;
 };
 
-export default getMovies;
+export const getTrendingMovies = async () => {
+  const result = await fetchData<MovieItem[]>({
+    destination: "trending/movie/week",
+    query: "",
+  });
+
+  return result;
+};

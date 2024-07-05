@@ -8,17 +8,18 @@ interface CardProps extends HTMLAttributes<HTMLElement> {
   imageUrl: string;
   title: string;
   description: string;
+  priority?: boolean;
 }
 
 const Card = (props: CardProps) => {
-  const { imageUrl, title = "-", description = "-", ...rest } = props;
+  const { imageUrl, priority, title = "-", description = "-", ...rest } = props;
   return (
     <article
       className={styles.card}
       style={{
         display: "flex",
         width: "154px",
-        height: "205px",
+        height: "231px",
         position: "relative",
         flexShrink: 0,
         borderRadius: spacing(2),
@@ -34,7 +35,14 @@ const Card = (props: CardProps) => {
           height: "100%",
         }}
       >
-        <Image src={imageUrl} alt={title} />
+        <Image
+          priority={priority}
+          src={imageUrl}
+          alt={title}
+          style={{
+            objectFit: "cover",
+          }}
+        />
       </Flex>
       <Flex
         id="description"
@@ -46,7 +54,7 @@ const Card = (props: CardProps) => {
           background: "var(--translucent-background)",
         }}
       >
-        <h4 className={styles.title}>{title}</h4>
+        <p className={styles.title}>{title}</p>
         <p className={styles.descriptionText}>{description}</p>
       </Flex>
     </article>

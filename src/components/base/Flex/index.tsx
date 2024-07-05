@@ -1,13 +1,19 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes, CSSProperties } from "react";
 import { flexStyles } from "./styles";
 
-const Flex: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+interface FlexProps extends HTMLAttributes<HTMLDivElement> {
+  style?: CSSProperties;
+}
+
+const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
   const { children, style, ...restProps } = props;
   return (
-    <div {...restProps} style={{ ...flexStyles, ...style }}>
+    <div ref={ref} {...restProps} style={{ ...flexStyles, ...style }}>
       {children}
     </div>
   );
-};
+});
+
+Flex.displayName = "Flex";
 
 export default Flex;

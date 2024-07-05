@@ -1,7 +1,5 @@
 import { Flex } from "@/components/base";
 import Card from "@/components/Card";
-import { getMovies } from "@/repositories";
-import getTVShow from "@/repositories/tvshow";
 import type { Metadata } from "next";
 import {
   flexContainerStyle,
@@ -9,7 +7,12 @@ import {
   flexScrollContainerStyle,
 } from "./styles";
 import { merge } from "@/utils/array";
-import Herotron from "./Herotron";
+import Herotron from "../../components/Herotron";
+import { getMovies } from "@/repositories/movies";
+import { getTVShow } from "@/repositories/tvshow";
+import { TrendingMovies } from "./TrendingMovies";
+import { TrendingTVShows } from "./TrendingTVShows";
+import { spacing } from "@/styles/utils";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -23,8 +26,8 @@ export default async function Home() {
   return (
     <Flex style={flexContainerStyle}>
       <Herotron data={overallTopRated} />
-      <section style={sectionStyle}>
-        <h2>Top rated Movies and TV Shows</h2>
+      <section style={{ ...sectionStyle, marginTop: spacing(-16), zIndex: 2 }}>
+        <h2>Movies and TV Shows</h2>
         <Flex style={flexScrollContainerStyle}>
           {overallTopRated.map(
             (
@@ -39,6 +42,7 @@ export default async function Home() {
               i,
             ) => (
               <Card
+                priority
                 key={i}
                 title={original_title ?? title ?? original_name ?? name}
                 description={overview}
@@ -48,6 +52,8 @@ export default async function Home() {
           )}
         </Flex>
       </section>
+      <TrendingMovies />
+      <TrendingTVShows />
     </Flex>
   );
 }

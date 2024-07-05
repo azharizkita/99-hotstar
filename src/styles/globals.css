@@ -1,8 +1,9 @@
 :root {
-  --foreground-rgb: 255, 255, 255;
+  --foreground-rgb: hsla(0, 0%, 100%, 0.87);
   --translucent-background: hsla(0, 3%, 20%, 0.707);
   --primary-glow: white;
   --secondary-glow: hsla(0, 0%, 100%, 0.6);
+  --disabled-glow: hsla(0, 0%, 41%, 0.982);
   --brand-accent: linear-gradient(145deg, orange, orange, white);
 }
 
@@ -69,7 +70,7 @@ main {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--foreground-rgb);
 }
 
 a {

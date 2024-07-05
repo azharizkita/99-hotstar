@@ -10,21 +10,24 @@ interface ImageLoaderProps
 }
 
 export default function Image(props: ImageLoaderProps) {
-  const { alt = "", src: _src, isBackground, ...restProps } = props;
+  const { alt = "", src: _src, priority, isBackground, ...restProps } = props;
   const src =
     _src === "#" || !_src
       ? placeholder
       : `${TMDB_IMAGE_BASE_URL}/${isBackground ? "w1280" : "w500"}${_src}`;
 
+  const isPrioritized = isBackground || priority;
   return (
     <NextImage
       fill
-      priority={isBackground}
+      priority={isPrioritized}
       alt={alt}
       src={src}
-      placeholder="blur"
-      loading={isBackground ? "eager" : "lazy"}
-      blurDataURL={placeholder.blurDataURL}
+      loading={isPrioritized ? "eager" : "lazy"}
+      {...(!isPrioritized && {
+        blurDataURL: placeholder.blurDataURL,
+        placeholder: "blur",
+      })}
       {...restProps}
     />
   );

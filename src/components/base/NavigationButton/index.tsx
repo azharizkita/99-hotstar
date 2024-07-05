@@ -39,6 +39,7 @@ const NavigationButton: FC<INavigationButton> = ({
 
   return (
     <Link
+      aria-label={title}
       href={href}
       className={`${styles.navWrapper} ${isHovered ? styles.navWrapperHover : ""} ${isActive ? styles.active : ""}`}
       onMouseEnter={() => setIsHovered(true)}
