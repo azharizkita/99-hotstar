@@ -14,14 +14,17 @@ const fetchData = async <T>({
   destination: string;
   query: string;
 }): Promise<FetchDataResponse<T>> => {
+  const headers = {
+    accept: "application/json",
+    Authorization: TMDB_BEARER_TOKEN || "",
+  };
+
   const response = await fetch(
     `https://api.themoviedb.org/3/${destination}?${query}`,
     {
+      method: "GET",
+      headers,
       next: { revalidate: 1 * 30 * 60 },
-      headers: {
-        accept: "application/json",
-        Authorization: TMDB_BEARER_TOKEN,
-      },
     },
   );
 
