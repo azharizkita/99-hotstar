@@ -9,6 +9,15 @@ module.exports = async () => {
   const nextConfig = {
     reactStrictMode: false,
     swcMinify: true,
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "image.tmdb.org",
+          pathname: "/t/p/**",
+        },
+      ],
+    },
   };
 
   const withSerwist = (await import("@serwist/next")).default({

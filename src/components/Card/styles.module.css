@@ -1,0 +1,42 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 750ms ease-in-out, box-shadow 750ms ease-in-out;
+}
+
+.description {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  transition: bottom 750ms ease-in-out;
+  transition-delay: 150ms;
+  z-index: 1;
+  backdrop-filter: blur(4px);
+}
+
+.card:hover .description {
+  bottom: 0;
+}
+
+.card:hover {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.descriptionText {
+  font-size: 0.6em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.title {
+  font-size: 0.75em;
+  margin: 0 0 4px 0;
+}

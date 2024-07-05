@@ -9,4 +9,7 @@ export const buttonStyles: CSSProperties = {
   fontWeight: "bold",
   color: "whitesmoke",
   transition: "all 300ms ease-in-out",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
