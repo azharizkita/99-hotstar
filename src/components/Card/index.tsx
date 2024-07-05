@@ -1,32 +1,37 @@
-import { spacing } from "@/styles/utils";
 import Image from "../base/Image";
 import { Flex } from "../base";
 import styles from "./styles.module.css";
 import type { HTMLAttributes } from "react";
+import {
+  cardStyle,
+  descriptionStyles,
+  descriptionTextStyles,
+  titleStyles,
+} from "./styles";
+import { ActionButton } from "./ActionButton";
 
 interface CardProps extends HTMLAttributes<HTMLElement> {
   imageUrl: string;
   title: string;
   description: string;
   priority?: boolean;
+  itemId: number;
+  type: "tv" | "movie";
 }
 
 const Card = (props: CardProps) => {
-  const { imageUrl, priority, title = "-", description = "-", ...rest } = props;
+  const {
+    imageUrl,
+    priority,
+    itemId: id,
+    type,
+    title = "-",
+    description = "-",
+    ...rest
+  } = props;
+
   return (
-    <article
-      className={styles.card}
-      style={{
-        display: "flex",
-        width: "154px",
-        height: "231px",
-        position: "relative",
-        flexShrink: 0,
-        borderRadius: spacing(2),
-        outline: "1px solid var(--translucent-background)",
-      }}
-      {...rest}
-    >
+    <article style={cardStyle} className={styles.card} {...rest}>
       <Flex
         style={{
           position: "absolute",
@@ -47,16 +52,12 @@ const Card = (props: CardProps) => {
       <Flex
         id="description"
         className={styles.description}
-        style={{
-          alignSelf: "end",
-          padding: spacing(2),
-          borderRadius: spacing(2),
-          background: "var(--translucent-background)",
-        }}
+        style={descriptionStyles}
       >
-        <p className={styles.title}>{title}</p>
-        <p className={styles.descriptionText}>{description}</p>
+        <p style={titleStyles}>{title}</p>
+        <p style={descriptionTextStyles}>{description}</p>
       </Flex>
+      <ActionButton id={id} type={type} />
     </article>
   );
 };

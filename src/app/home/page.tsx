@@ -38,10 +38,13 @@ export default async function Home() {
                 title,
                 original_name,
                 name,
+                id,
               },
               i,
             ) => (
               <Card
+                itemId={id}
+                type={original_title || title ? "movie" : "tv"}
                 priority
                 key={i}
                 title={original_title ?? title ?? original_name ?? name}

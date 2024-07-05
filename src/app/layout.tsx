@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import Sidebar from "@/components/Sidebar";
+import { WatchlistProvider } from "@/context/watchlist-storage";
 
 const inter = Poppins({ weight: "300", subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Sidebar />
-        <main>{children}</main>
+        <WatchlistProvider>
+          <Sidebar />
+          <main>{children}</main>
+        </WatchlistProvider>
       </body>
     </html>
   );

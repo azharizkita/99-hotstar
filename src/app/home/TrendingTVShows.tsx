@@ -9,14 +9,18 @@ export const TrendingTVShows = async () => {
     <section style={sectionStyle}>
       <h2>TV Shows of the week</h2>
       <Flex style={flexScrollContainerStyle}>
-        {results.map(({ overview, poster_path, original_name, name }, i) => (
-          <Card
-            key={i}
-            title={original_name ?? name}
-            description={overview}
-            imageUrl={poster_path ?? ""}
-          />
-        ))}
+        {results.map(
+          ({ id, overview, poster_path, original_name, name }, i) => (
+            <Card
+              itemId={id}
+              type="movie"
+              key={i}
+              title={original_name ?? name}
+              description={overview}
+              imageUrl={poster_path ?? ""}
+            />
+          ),
+        )}
       </Flex>
     </section>
   );

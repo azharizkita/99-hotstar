@@ -6,7 +6,7 @@ import { spacing } from "@/styles/utils";
 import { NAVIGATIONS } from "@/constants/navigation";
 import useDebouncedValue from "@/hooks/use-debounced-value";
 import styles from "./styles.module.css";
-import { sidebarStyles } from "./styles";
+import { backdropStyles, sidebarStyles } from "./styles";
 
 const Sidebar = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -16,7 +16,8 @@ const Sidebar = () => {
     <>
       <Flex
         id="backdrop"
-        className={`${styles.backdrop} ${debouncedIsHovered ? styles.backdropExpanded : ""}`}
+        style={backdropStyles}
+        className={debouncedIsHovered ? styles.backdropExpanded : ""}
       />
       <Flex style={sidebarStyles}>
         <Brand />
