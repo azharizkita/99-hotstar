@@ -8,7 +8,9 @@ export default function Home() {
       style={{
         justifyContent: "center",
         alignItems: "center",
+        alignSelf: "center",
         gap: spacing(4),
+        maxWidth: "650px",
         ...contentSafeAreaStyles,
       }}
     >
