@@ -1,9 +1,11 @@
 import { Flex } from "@/components/base";
+import SearchContent from "./SearchContent";
+import { pageStyles } from "./styles";
 
 export default function Search() {
   return (
-    <Flex style={{ justifyContent: "center", alignItems: "center" }}>
-      <h1>Search</h1>
+    <Flex style={pageStyles}>
+      <SearchContent />
     </Flex>
   );
 }

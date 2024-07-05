@@ -37,3 +37,15 @@ export const contentStyle: CSSProperties = {
   flexDirection: "column",
   gap: "1rem",
 };
+
+export const radioContainerStyle: CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: spacing(2),
+};
+
+export const radioStyle: CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: spacing(1),
+};

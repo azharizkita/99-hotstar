@@ -1,17 +1,10 @@
 import { Flex } from "@/components/base";
-import { contentSafeAreaStyles, spacing } from "@/styles/utils";
 import WatchlistContent from "./WatchlistContent";
+import { pageStyles } from "./styles";
 
 export default function Watchlist() {
   return (
-    <Flex
-      style={{
-        ...contentSafeAreaStyles,
-        paddingTop: spacing(15),
-        gap: spacing(4),
-        flexDirection: "column",
-      }}
-    >
+    <Flex style={pageStyles}>
       <WatchlistContent />
     </Flex>
   );
