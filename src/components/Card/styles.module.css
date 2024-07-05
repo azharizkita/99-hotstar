@@ -3,7 +3,9 @@
   overflow: hidden;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 750ms ease-in-out, box-shadow 750ms ease-in-out;
+  transition:
+    transform 750ms ease-in-out,
+    box-shadow 750ms ease-in-out;
 }
 
 .description {
