@@ -16,7 +16,6 @@ import {
 import { ActionButton } from "./ActionButton";
 import type { WatchlistItem } from "@/context/watchlist-storage/types";
 import Link from "next/link";
-import { spacing } from "@/styles/utils";
 import { formatDate } from "@/utils/date";
 
 interface CardProps extends HTMLAttributes<HTMLElement> {
@@ -58,7 +57,7 @@ const Card = (props: CardProps) => {
   return (
     <Link
       style={{ pointerEvents: isEpisode ? "none" : "auto" }}
-      href={`/${entrypoint}/${type}/${id}`}
+      href={`/${type}/${id}`}
       aria-label={title}
     >
       <article
