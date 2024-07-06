@@ -20,7 +20,7 @@ const MovieDetails = ({ data }: { data: MovieDetail }) => {
     original_language: data.original_language,
     original_name: "",
     release_date: data.release_date,
-    original_title: data.original_title,
+    original_title: data.title,
     popularity: data.popularity,
     poster_path: data.poster_path,
     title: data.title,

@@ -17,6 +17,7 @@ import { ActionButton } from "./ActionButton";
 import type { WatchlistItem } from "@/context/watchlist-storage/types";
 import Link from "next/link";
 import { formatDate } from "@/utils/date";
+import { titleEncoder } from "@/utils/encoder";
 
 interface CardProps extends HTMLAttributes<HTMLElement> {
   imageUrl: string;
@@ -57,7 +58,7 @@ const Card = (props: CardProps) => {
   return (
     <Link
       style={{ pointerEvents: isEpisode ? "none" : "auto" }}
-      href={`/${type}/${id}`}
+      href={`/${type}/${id}-${titleEncoder(title)}`}
       aria-label={title}
     >
       <article

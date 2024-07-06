@@ -11,7 +11,6 @@ const fetchData = async <T>({
     accept: "application/json",
     Authorization: TMDB_BEARER_TOKEN || "",
   };
-
   const response = await fetch(
     `https://api.themoviedb.org/3/${destination}?${query}`,
     {

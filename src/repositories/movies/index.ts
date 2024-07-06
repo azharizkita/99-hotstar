@@ -1,4 +1,4 @@
-import { fetchData } from "@/app/utils";
+import { fetchData } from "@/utils";
 import type { FetchDataResponse, MovieDetail, MovieItem } from "../types";
 import useSWR, { SWRResponse } from "swr";
 

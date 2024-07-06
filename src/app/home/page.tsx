@@ -15,7 +15,7 @@ import { TrendingTVShows } from "./TrendingTVShows";
 import { spacing } from "@/styles/utils";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "99 Hotstar | Home",
 };
 
 export default async function Home() {
@@ -30,24 +30,13 @@ export default async function Home() {
         <h2>Movies and TV Shows</h2>
         <Flex style={flexScrollContainerStyle}>
           {overallTopRated.map(
-            (
-              {
-                overview,
-                poster_path,
-                original_title,
-                title,
-                original_name,
-                name,
-                id,
-              },
-              i,
-            ) => (
+            ({ overview, poster_path, title, name, id }, i) => (
               <Card
                 itemId={id}
-                type={original_title || title ? "movie" : "tv"}
+                type={title ? "movie" : "tv"}
                 priority
                 key={i}
-                title={original_title ?? title ?? original_name ?? name}
+                title={title ?? name}
                 description={overview ?? ""}
                 imageUrl={poster_path ?? ""}
                 entrypoint="home"

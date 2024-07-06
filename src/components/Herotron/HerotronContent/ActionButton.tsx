@@ -8,6 +8,8 @@ import { use } from "react";
 import { WatchlistContext } from "@/context/watchlist-storage";
 import PlaylistRemoveIcon from "@/Icons/PlaylistRemoveIcon";
 import type { WatchlistItem } from "@/context/watchlist-storage/types";
+import Link from "next/link";
+import { titleEncoder } from "@/utils/encoder";
 
 export const ActionButton = (props: {
   watchListProps: WatchlistItem;
@@ -28,13 +30,18 @@ export const ActionButton = (props: {
   return (
     <Flex style={buttonContainerStyle}>
       {!isSingle && (
-        <Button
-          variant="translucent"
-          style={{ width: "100%" }}
-          aria-label="More details"
+        <Link
+          style={{ width: "100%", height: "100%" }}
+          href={`/${watchListProps.type}/${watchListProps.id}-${titleEncoder(watchListProps.title)}`}
         >
-          More details
-        </Button>
+          <Button
+            variant="translucent"
+            style={{ width: "100%", height: "44px" }}
+            aria-label="More details"
+          >
+            More details
+          </Button>
+        </Link>
       )}
       <Button
         variant="translucent"

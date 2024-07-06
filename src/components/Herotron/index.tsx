@@ -25,19 +25,11 @@ const Herotron = ({ data, isSingle = false }: HerotronProps) => {
     return () => clearInterval(interval);
   }, [data.length]);
 
-  const {
-    original_name,
-    name,
-    original_title,
-    title,
-    overview,
-    id,
-    poster_path,
-    release_date,
-  } = data[currentIndex];
-  const itemName = original_name || name || original_title || title;
+  const { name, title, overview, id, poster_path, release_date } =
+    data[currentIndex];
+  const itemName = name || title;
   const itemDescription = overview;
-  const itemType = original_name || name ? "tv" : "movie";
+  const itemType = name ? "tv" : "movie";
 
   const watchListProps: WatchlistItem = {
     description: itemDescription ?? "",

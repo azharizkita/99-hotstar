@@ -21,7 +21,7 @@ const TVShowDetails = ({ data }: { data: TVShowDetail }) => {
     original_language: data.original_language,
     original_name: "",
     release_date: data.first_air_date,
-    original_title: data.original_name,
+    original_title: data.name,
     popularity: data.popularity,
     poster_path: data.poster_path,
     title: data.name,

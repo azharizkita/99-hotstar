@@ -15,11 +15,10 @@ const SearchResultGrid: React.FC<SearchResultGridProps> = ({ data }) => {
       data.map((item) => ({
         key: item.id,
         imageUrl: item.poster_path ?? "",
-        title:
-          item.original_title ?? item.title ?? item.original_name ?? item.name,
+        title: item.title ?? item.name,
         description: item.overview,
         itemId: item.id,
-        type: item.original_title || item.title ? "movie" : "tv",
+        type: item.title ? "movie" : "tv",
       })),
     [data],
   );

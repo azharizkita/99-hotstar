@@ -11,7 +11,7 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const id = params.id;
+  const id = params.id.split("-")[0];
 
   const { poster_path, title, overview } = await getMovieDetails(id);
 
@@ -27,7 +27,7 @@ export async function generateMetadata(
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = params;
+  const id = params.id.split("-")[0];
   const data = await getMovieDetails(id);
 
   return <MovieDetails data={data} />;
