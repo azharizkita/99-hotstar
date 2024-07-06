@@ -16,8 +16,9 @@ export const TrendingMovies = async () => {
               type="movie"
               key={i}
               title={original_title ?? title}
-              description={overview}
+              description={overview ?? ""}
               imageUrl={poster_path ?? ""}
+              entrypoint="home"
             />
           ),
         )}

@@ -1,9 +1,9 @@
 import { fetchData } from "@/app/utils";
-import type { MovieItem } from "../types";
+import type { FetchDataResponse, MovieDetail, MovieItem } from "../types";
 import useSWR, { SWRResponse } from "swr";
 
 export const getMovies = async () => {
-  const result = await fetchData<MovieItem[]>({
+  const result = await fetchData<FetchDataResponse<MovieItem[]>>({
     destination: "movie/top_rated",
     query: "page=1",
   });
@@ -11,8 +11,17 @@ export const getMovies = async () => {
   return result;
 };
 
+export const getMovieDetails = async (id: string | number) => {
+  const result = await fetchData<MovieDetail>({
+    destination: `movie/${id}`,
+    query: "",
+  });
+
+  return result;
+};
+
 export const getTrendingMovies = async () => {
-  const result = await fetchData<MovieItem[]>({
+  const result = await fetchData<FetchDataResponse<MovieItem[]>>({
     destination: "trending/movie/week",
     query: "",
   });
@@ -23,7 +32,7 @@ export const getTrendingMovies = async () => {
 const searchMovies = async (props: string): Promise<{ data: MovieItem[] }> => {
   const [_, keyword] = props as unknown as string[];
   const _keyword = encodeURIComponent(keyword);
-  const result = await fetchData<MovieItem[]>({
+  const result = await fetchData<FetchDataResponse<MovieItem[]>>({
     destination: "search/movie",
     query: `query=${_keyword}&include_adult=false&language=en-US&page=1`,
   });

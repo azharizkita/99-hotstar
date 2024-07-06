@@ -67,6 +67,7 @@ const WatchlistContent = () => {
                 description={item.description}
                 itemId={item.id}
                 type={item.type}
+                entrypoint="watchlist"
               />
             ))}
           </div>

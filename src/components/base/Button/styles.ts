@@ -12,4 +12,5 @@ export const buttonStyles: CSSProperties = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  gap: spacing(2),
 };

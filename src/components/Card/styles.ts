@@ -14,6 +14,23 @@ export const cardStyle: CSSProperties = {
   outline: "1px solid var(--translucent-background)",
 };
 
+export const episodeCardStyle: CSSProperties = {
+  width: "100%",
+  height: "calc(90px * 1.5)",
+  flexDirection: "row",
+};
+
+export const imageStyle: CSSProperties = {
+  objectFit: "cover",
+};
+
+export const episodeImageStyle: CSSProperties = {
+  position: "absolute",
+  zIndex: 0,
+  width: "calc(160px * 1.5)",
+  height: "calc(90px * 1.5)",
+};
+
 export const descriptionStyles: CSSProperties = {
   position: "absolute",
   bottom: "-100%",
@@ -28,6 +45,21 @@ export const descriptionStyles: CSSProperties = {
   gap: spacing(2),
   background: "var(--translucent-background)",
   transition: "bottom 750ms ease-in-out",
+};
+
+export const episodeDescriptionStyles: CSSProperties = {
+  position: "relative",
+  bottom: "initial",
+  height: "100%",
+  marginLeft: "calc(160px * 1.5)",
+  paddingLeft: spacing(4),
+  background: "none",
+  fontSize: "0.9em",
+};
+
+export const episodeDurationStyle: CSSProperties = {
+  bottom: spacing(2),
+  position: "absolute",
 };
 
 export const descriptionTextStyles: CSSProperties = {

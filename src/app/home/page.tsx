@@ -48,8 +48,9 @@ export default async function Home() {
                 priority
                 key={i}
                 title={original_title ?? title ?? original_name ?? name}
-                description={overview}
+                description={overview ?? ""}
                 imageUrl={poster_path ?? ""}
+                entrypoint="home"
               />
             ),
           )}

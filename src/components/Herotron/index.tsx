@@ -9,11 +9,12 @@ import { HerotronContent } from "./HerotronContent";
 import { containerStles } from "./styles";
 import type { WatchlistItem } from "@/context/watchlist-storage/types";
 
-interface HerotronProps {
+export interface HerotronProps {
   data: Mergeable<MovieItem, TVShowItem>[];
+  isSingle?: boolean;
 }
 
-const Herotron = ({ data }: HerotronProps) => {
+const Herotron = ({ data, isSingle = false }: HerotronProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -32,13 +33,14 @@ const Herotron = ({ data }: HerotronProps) => {
     overview,
     id,
     poster_path,
+    release_date,
   } = data[currentIndex];
-  const itemName = original_name ?? name ?? original_title ?? title;
+  const itemName = original_name || name || original_title || title;
   const itemDescription = overview;
-  const itemType = original_name || name ? "movie" : "tv";
+  const itemType = original_name || name ? "tv" : "movie";
 
   const watchListProps: WatchlistItem = {
-    description: itemDescription,
+    description: itemDescription ?? "",
     title: itemName,
     imageUrl: poster_path ?? "",
     id,
@@ -48,7 +50,11 @@ const Herotron = ({ data }: HerotronProps) => {
   return (
     <Flex style={containerStles}>
       <ImageCarousel data={data} currentIndex={currentIndex} />
-      <HerotronContent watchListProps={watchListProps} />
+      <HerotronContent
+        releaseDate={release_date}
+        isSingle={isSingle}
+        watchListProps={watchListProps}
+      />
     </Flex>
   );
 };

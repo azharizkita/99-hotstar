@@ -16,8 +16,9 @@ export const TrendingTVShows = async () => {
               type="movie"
               key={i}
               title={original_name ?? name}
-              description={overview}
+              description={overview ?? ""}
               imageUrl={poster_path ?? ""}
+              entrypoint="home"
             />
           ),
         )}

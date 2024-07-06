@@ -17,7 +17,7 @@ export const buttonContainerStyle: CSSProperties = {
 };
 
 export const flexContentStyle: CSSProperties = {
-  gap: spacing(5),
+  gap: spacing(3),
   width: "100%",
   maxWidth: "250px",
   position: "absolute",

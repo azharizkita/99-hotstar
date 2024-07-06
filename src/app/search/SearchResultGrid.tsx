@@ -32,9 +32,10 @@ const SearchResultGrid: React.FC<SearchResultGridProps> = ({ data }) => {
             key={item.key}
             imageUrl={item.imageUrl}
             title={item.title}
-            description={item.description}
+            description={item.description ?? ""}
             itemId={item.itemId}
             type={item.type as "tv" | "movie"}
+            entrypoint="search"
           />
         ))}
       </div>

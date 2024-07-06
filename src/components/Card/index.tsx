@@ -7,9 +7,17 @@ import {
   descriptionStyles,
   descriptionTextStyles,
   titleStyles,
+  episodeCardStyle,
+  imageStyle,
+  episodeImageStyle,
+  episodeDescriptionStyles,
+  episodeDurationStyle,
 } from "./styles";
 import { ActionButton } from "./ActionButton";
 import type { WatchlistItem } from "@/context/watchlist-storage/types";
+import Link from "next/link";
+import { spacing } from "@/styles/utils";
+import { formatDate } from "@/utils/date";
 
 interface CardProps extends HTMLAttributes<HTMLElement> {
   imageUrl: string;
@@ -18,6 +26,10 @@ interface CardProps extends HTMLAttributes<HTMLElement> {
   priority?: boolean;
   itemId: number;
   type: "tv" | "movie";
+  entrypoint: string;
+  isEpisode?: boolean;
+  releaseDate?: string;
+  duration?: number;
 }
 
 const Card = (props: CardProps) => {
@@ -28,6 +40,10 @@ const Card = (props: CardProps) => {
     type,
     title = "-",
     description = "-",
+    entrypoint,
+    isEpisode = false,
+    duration,
+    releaseDate,
     ...rest
   } = props;
 
@@ -40,34 +56,57 @@ const Card = (props: CardProps) => {
   };
 
   return (
-    <article style={cardStyle} className={styles.card} {...rest}>
-      <Flex
-        style={{
-          position: "absolute",
-          zIndex: 0,
-          width: "100%",
-          height: "100%",
-        }}
+    <Link
+      style={{ pointerEvents: isEpisode ? "none" : "auto" }}
+      href={`/${entrypoint}/${type}/${id}`}
+      aria-label={title}
+    >
+      <article
+        style={{ ...cardStyle, ...(isEpisode && episodeCardStyle) }}
+        className={styles.card}
+        {...rest}
       >
-        <Image
-          priority={priority}
-          src={imageUrl}
-          alt={title}
+        <Flex
           style={{
-            objectFit: "cover",
+            ...(isEpisode
+              ? episodeImageStyle
+              : {
+                  position: "absolute",
+                  zIndex: 0,
+                  width: "100%",
+                  height: "100%",
+                }),
           }}
-        />
-      </Flex>
-      <Flex
-        id="description"
-        className={styles.description}
-        style={descriptionStyles}
-      >
-        <p style={titleStyles}>{title}</p>
-        <p style={descriptionTextStyles}>{description}</p>
-      </Flex>
-      <ActionButton watchListProps={watchListProps} />
-    </article>
+        >
+          <Image
+            priority={priority}
+            src={imageUrl}
+            alt={title}
+            style={imageStyle}
+          />
+        </Flex>
+        <Flex
+          id="description"
+          className={styles.description}
+          style={{
+            ...descriptionStyles,
+            ...(isEpisode && episodeDescriptionStyles),
+          }}
+        >
+          <p style={titleStyles}>{title}</p>
+          <p style={descriptionTextStyles}>{description}</p>
+          {isEpisode && (
+            <Flex style={episodeDurationStyle}>
+              <p style={descriptionTextStyles}>
+                {duration && `${duration} minutes ${releaseDate ? "| " : ""}`}
+                {releaseDate && formatDate(releaseDate)}
+              </p>
+            </Flex>
+          )}
+        </Flex>
+        {!isEpisode && <ActionButton watchListProps={watchListProps} />}
+      </article>
+    </Link>
   );
 };
 
