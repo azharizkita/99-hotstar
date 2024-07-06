@@ -57,7 +57,10 @@ const Card = (props: CardProps) => {
 
   return (
     <Link
-      style={{ pointerEvents: isEpisode ? "none" : "auto" }}
+      style={{
+        pointerEvents: isEpisode ? "none" : "auto",
+        height: "fit-content",
+      }}
       href={`/${type}/${id}-${titleEncoder(title)}`}
       aria-label={title}
     >

@@ -14,38 +14,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes slide-from-bottom {
-  from {
-    transform: translateY(90svh);
-  }
-}
-
-@keyframes slide-from-top {
-  from {
-    transform: translateY(-90svh);
-  }
-}
-
-@keyframes slide-to-bottom {
-  to {
-    transform: translateY(90svh);
-  }
-}
-
-@keyframes slide-to-top {
-  to {
-    transform: translateY(-90svh);
-  }
-}
-
-::view-transition-old(root) {
-  animation: 300ms ease-in-out both var(--slide-out-animation);
-}
-
-::view-transition-new(root) {
-  animation: 300ms ease-in-out both var(--slide-in-animation);
-}
-
 * {
   box-sizing: border-box;
   padding: 0;

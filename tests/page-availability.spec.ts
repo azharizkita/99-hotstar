@@ -20,9 +20,9 @@ test("Able to see Home page", async ({ page }) => {
   ).toBeVisible();
 
   await expect(page.getByRole("link", { name: "Hotstar" })).toBeVisible();
-  await expect(page.getByLabel("Home")).toBeVisible();
-  await expect(page.getByLabel("Search")).toBeVisible();
-  await expect(page.getByLabel("Watchlist")).toBeVisible();
+  await expect(page.getByLabel("Home", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Search", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Watchlist", { exact: true })).toBeVisible();
 });
 
 test("Able to see Search page", async ({ page }) => {

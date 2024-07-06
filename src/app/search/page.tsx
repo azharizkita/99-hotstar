@@ -2,6 +2,7 @@ import { Flex } from "@/components/base";
 import SearchContent from "./SearchContent";
 import { pageStyles } from "./styles";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "99 Hotstar | Search",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 export default function Search() {
   return (
     <Flex style={pageStyles}>
-      <SearchContent />
+      <Suspense>
+        <SearchContent />
+      </Suspense>
     </Flex>
   );
 }

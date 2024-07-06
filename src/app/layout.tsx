@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import Sidebar from "@/components/Sidebar";
 import { WatchlistProvider } from "@/context/watchlist-storage";
+import { PreloadResources } from "./preload-resources";
 
 const inter = Poppins({ weight: "300", subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <PreloadResources />
       <body className={inter.className}>
         <WatchlistProvider>
           <Sidebar />

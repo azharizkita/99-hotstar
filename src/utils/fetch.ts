@@ -1,4 +1,12 @@
-import { TMDB_BEARER_TOKEN } from "@/constants/tmdb";
+import { TMDB_API_URL, TMDB_BEARER_TOKEN } from "@/constants/tmdb";
+import { notFound } from "next/navigation";
+
+const revalidateTime = 3600 * 20;
+
+const headers: HeadersInit = {
+  accept: "application/json",
+  Authorization: TMDB_BEARER_TOKEN || "",
+};
 
 const fetchData = async <T>({
   destination,
@@ -7,21 +15,19 @@ const fetchData = async <T>({
   destination: string;
   query: string;
 }): Promise<T> => {
-  const headers = {
-    accept: "application/json",
-    Authorization: TMDB_BEARER_TOKEN || "",
-  };
-  const response = await fetch(
-    `https://api.themoviedb.org/3/${destination}?${query}`,
-    {
-      method: "GET",
-      headers,
-      next: { revalidate: 1 * 30 * 60 },
-    },
-  );
+  const response = await fetch(`${TMDB_API_URL}/3/${destination}?${query}`, {
+    method: "GET",
+    headers,
+    next: { revalidate: revalidateTime },
+  });
 
-  const data: T = await response.json();
-  return data;
+  if (response.status === 404) {
+    notFound();
+  }
+
+  const data = await response.json();
+
+  return data as T;
 };
 
 export default fetchData;

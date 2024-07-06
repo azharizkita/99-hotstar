@@ -19,3 +19,5 @@ export const merge = <T, U>(
 
   return mergedArray;
 };
+
+export const arrayForm = (total: number) => Array.from(Array(total).keys());

@@ -5,7 +5,6 @@ import type {
   TVShowDetail,
   TVShowItem,
 } from "../types";
-import useSWR, { type SWRResponse } from "swr";
 
 export const getTVShow = async () => {
   const result = await fetchData<FetchDataResponse<TVShowItem[]>>({
@@ -25,7 +24,7 @@ export const getTVShowDetails = async (id: string | number) => {
   return result;
 };
 
-const getTVShowSeasonDetails = async (props: string): Promise<SeasonDetail> => {
+export const getTVShowSeasonDetails = async (props: string) => {
   const [_, id, seasonNumber] = props as unknown as string[];
   const result = await fetchData<SeasonDetail>({
     destination: `tv/${id}/season/${seasonNumber}`,
@@ -33,23 +32,6 @@ const getTVShowSeasonDetails = async (props: string): Promise<SeasonDetail> => {
   });
 
   return result;
-};
-
-const searchTVShowSeasonDetails = async (
-  keyword: string,
-): Promise<SeasonDetail> => {
-  const result = await getTVShowSeasonDetails(keyword);
-  return result;
-};
-
-export const useGetTVShowDetail = (
-  id: string | number,
-  seasonNumber?: string | number | null,
-): SWRResponse<SeasonDetail, any> => {
-  return useSWR<SeasonDetail, any>(
-    id || seasonNumber ? ["getTVShowSeasonDetails", id, seasonNumber] : null,
-    searchTVShowSeasonDetails,
-  );
 };
 
 export const getTrendingTVShows = async () => {
@@ -61,9 +43,7 @@ export const getTrendingTVShows = async () => {
   return result;
 };
 
-const searchTVShows = async (
-  props: string,
-): Promise<{ data: TVShowItem[] }> => {
+export const searchTVShows = async (props: string) => {
   const [_, keyword] = props as unknown as string[];
   const _keyword = encodeURIComponent(keyword);
   const result = await fetchData<FetchDataResponse<TVShowItem[]>>({
@@ -71,19 +51,5 @@ const searchTVShows = async (
     query: `query=${_keyword}&include_adult=false&language=en-US&page=1`,
   });
 
-  return { data: result.results };
-};
-
-const searchSearchTVShows = async (keyword: string): Promise<TVShowItem[]> => {
-  const result = await searchTVShows(keyword);
-  return result.data;
-};
-
-export const useSearchTVShows = (
-  keyword: string | null,
-): SWRResponse<TVShowItem[], any> => {
-  return useSWR<TVShowItem[], any>(
-    keyword ? ["searchTVShows", keyword] : null,
-    searchSearchTVShows,
-  );
+  return result.results;
 };

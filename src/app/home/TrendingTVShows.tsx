@@ -12,7 +12,7 @@ export const TrendingTVShows = async () => {
         {results.map(({ id, overview, poster_path, name }, i) => (
           <Card
             itemId={id}
-            type="movie"
+            type="tv"
             key={i}
             title={name}
             description={overview ?? ""}

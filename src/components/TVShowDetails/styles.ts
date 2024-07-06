@@ -1,12 +1,15 @@
 import { contentSafeAreaStyles, spacing } from "@/styles/utils";
 import { CSSProperties } from "react";
 
+export const contentWrapper: CSSProperties = {
+  minHeight: `calc((135px * 3) + (${spacing(4)} * 3))`,
+};
+
 export const gridStyle: CSSProperties = {
   display: "grid",
   gridTemplateColumns: `repeat(auto-fill, minmax(${spacing(105)}, 2fr))`,
   gap: spacing(4),
   width: "100%",
-  minHeight: `calc((135px * 3) + (${spacing(4)} * 3))`,
 };
 
 export const selectContainer: CSSProperties = {

@@ -1,21 +1,30 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Flex } from "@/components/base";
 import useDebouncedValue from "@/hooks/use-debounced-value";
 import EmptyMessage from "@/components/EmptyMessage";
-import { useSearchMovies } from "@/repositories/movies";
-import { useSearchTVShows } from "@/repositories/tvshow";
 import { Mergeable } from "@/utils/array";
 import { MovieItem, TVShowItem } from "@/repositories/types";
 import { headerStyle, searchInputStyle } from "./styles";
 import SearchFilter from "./SearchFilter";
 import SearchResultGrid from "./SearchResultGrid";
+import { useSearchMovies } from "@/hooks/use-search-movies";
+import { useSearchTVShows } from "@/hooks/use-search-tv-shows";
 
 const SearchContent = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filter, setFilter] = useState<"all" | "movies" | "tvShows">("all");
-  const debouncedSearchTerm = useDebouncedValue(searchTerm, 450);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const searchTerm = searchParams.get("q") || "";
+  const filter = (searchParams.get("filter") || "all") as
+    | "all"
+    | "movies"
+    | "tvShows";
+
+  const debouncedSearchTerm = useDebouncedValue(searchTerm, 650);
 
   const { data: movies, isLoading: isMoviesLoading } = useSearchMovies(
     filter === "tvShows" ? null : debouncedSearchTerm,
@@ -59,12 +68,22 @@ const SearchContent = () => {
     }
   };
 
+  const updateSearchParams = (params: { [key: string]: string }) => {
+    const newSearchParams = new URLSearchParams(searchParams as any);
+
+    Object.keys(params).forEach((key) => {
+      newSearchParams.set(key, params[key]);
+    });
+
+    router.push(`${pathname}?${newSearchParams.toString()}`);
+  };
+
   const handleSearchTermChange = (value: string) => {
-    setSearchTerm(value);
+    updateSearchParams({ q: value });
   };
 
   const handleFilterChange = (newFilter: "all" | "movies" | "tvShows") => {
-    setFilter(newFilter);
+    updateSearchParams({ filter: newFilter });
   };
 
   return (

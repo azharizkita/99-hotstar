@@ -3,12 +3,17 @@
 import { useState } from "react";
 import { Flex } from "../base";
 import type { TVShowDetail } from "@/repositories/types";
-import { useGetTVShowDetail } from "@/repositories/tvshow";
 import Card from "../Card";
-import { selectContainer, selectStyle, gridStyle } from "./styles";
+import {
+  selectContainer,
+  selectStyle,
+  gridStyle,
+  contentWrapper,
+} from "./styles";
+import { useGetTVShowDetail } from "@/hooks/use-get-session-details";
 
 const SeasonContent = ({ data }: { data: TVShowDetail }) => {
-  const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
+  const [selectedSeason, setSelectedSeason] = useState<number>(1);
   const { data: seasonDetail } = useGetTVShowDetail(data.id, selectedSeason);
 
   return (
@@ -22,10 +27,8 @@ const SeasonContent = ({ data }: { data: TVShowDetail }) => {
       <Flex style={selectContainer}>
         <select
           id="season-selection"
-          value={selectedSeason ?? ""}
-          onChange={(e) =>
-            setSelectedSeason(e.target.value ? parseInt(e.target.value) : null)
-          }
+          value={selectedSeason}
+          onChange={(e) => setSelectedSeason(Number(e.target.value))}
           style={selectStyle}
         >
           {data.seasons.map((season) => (
@@ -35,24 +38,26 @@ const SeasonContent = ({ data }: { data: TVShowDetail }) => {
           ))}
         </select>
       </Flex>
-      <div style={gridStyle}>
-        {seasonDetail &&
-          seasonDetail.episodes.map((episode) => (
-            <Card
-              key={episode.id}
-              imageUrl={episode.still_path}
-              title={`E${episode.episode_number} - ${episode.name}`}
-              description={episode.overview}
-              priority={false}
-              itemId={episode.id}
-              type="tv"
-              isEpisode
-              entrypoint="episode"
-              releaseDate={episode.air_date}
-              duration={episode.runtime}
-            />
-          ))}
-      </div>
+      <Flex style={contentWrapper}>
+        <div style={gridStyle}>
+          {seasonDetail &&
+            seasonDetail.episodes.map((episode) => (
+              <Card
+                key={episode.id}
+                imageUrl={episode.still_path}
+                title={`E${episode.episode_number} - ${episode.name}`}
+                description={episode.overview}
+                priority={false}
+                itemId={episode.id}
+                type="tv"
+                isEpisode
+                entrypoint="episode"
+                releaseDate={episode.air_date}
+                duration={episode.runtime}
+              />
+            ))}
+        </div>
+      </Flex>
     </>
   );
 };
