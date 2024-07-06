@@ -13,12 +13,15 @@ const SeasonContent = ({ data }: { data: TVShowDetail }) => {
 
   return (
     <>
-      <h2>Select Season</h2>
+      <label htmlFor="season-selection">
+        <h2>Select Season</h2>
+      </label>
       <p style={{ lineHeight: "10px" }}>
         {data.number_of_seasons} seasons in total
       </p>
       <Flex style={selectContainer}>
         <select
+          id="season-selection"
           value={selectedSeason ?? ""}
           onChange={(e) =>
             setSelectedSeason(e.target.value ? parseInt(e.target.value) : null)

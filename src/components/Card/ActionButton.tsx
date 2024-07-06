@@ -30,6 +30,9 @@ export const ActionButton = (props: { watchListProps: WatchlistItem }) => {
       onClick={handleClick}
       className={styles.hoverCircle}
       style={hoverCircleStyle}
+      aria-label={
+        isExistInWatchlist ? "Remove from watchlist" : "Add to watchlist"
+      }
     >
       {isExistInWatchlist ? (
         <PlaylistRemoveIcon fill="red" />
