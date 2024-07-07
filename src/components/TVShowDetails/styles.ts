@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 
 export const contentWrapper: CSSProperties = {
   minHeight: `calc((135px * 3) + (${spacing(4)} * 3))`,
+  paddingTop: spacing(2),
 };
 
 export const gridStyle: CSSProperties = {

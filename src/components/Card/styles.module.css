@@ -1,3 +1,22 @@
+@media (max-width: 540px) {
+  .episodeCard {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 300px !important;
+  }
+
+  .episodeDescription {
+    position: initial !important;
+    height: auto !important;
+    width: 100%;
+    background: var(--translucent-background) !important;
+  }
+
+  .episodeImage {
+    position: initial !important;
+  }
+}
+
 .card:hover .description {
   bottom: 0 !important;
 }

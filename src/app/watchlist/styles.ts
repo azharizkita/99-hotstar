@@ -10,6 +10,8 @@ export const pageStyles: CSSProperties = {
 
 export const gridStyle: CSSProperties = {
   display: "grid",
+  justifyItems: "center",
+  justifyContent: "center",
   gridTemplateColumns: `repeat(auto-fill, minmax(${spacing(38)}, 1fr))`,
   gap: spacing(4),
   width: "100%",

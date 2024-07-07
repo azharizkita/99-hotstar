@@ -66,10 +66,11 @@ const Card = (props: CardProps) => {
     >
       <article
         style={{ ...cardStyle, ...(isEpisode && episodeCardStyle) }}
-        className={styles.card}
+        className={`${styles.card} ${isEpisode ? styles.episodeCard : ""}`}
         {...rest}
       >
         <Flex
+          className={isEpisode ? styles.episodeImage : ""}
           style={{
             ...(isEpisode
               ? episodeImageStyle
@@ -90,7 +91,7 @@ const Card = (props: CardProps) => {
         </Flex>
         <Flex
           id="description"
-          className={styles.description}
+          className={`${styles.description} ${isEpisode ? styles.episodeDescription : ""}`}
           style={{
             ...descriptionStyles,
             ...(isEpisode && episodeDescriptionStyles),

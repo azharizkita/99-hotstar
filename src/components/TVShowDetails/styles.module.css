@@ -1,0 +1,8 @@
+@media (max-width: 540px) {
+  .episodeCardHolder {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 350px !important;
+    gap: 8px;
+  }
+}
