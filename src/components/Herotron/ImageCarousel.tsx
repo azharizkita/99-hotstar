@@ -12,8 +12,9 @@ interface ImageCarouselProps {
 
 export const ImageCarousel = ({ data, currentIndex }: ImageCarouselProps) => (
   <Flex id="image-holder" style={imageHolderStyle}>
-    {data.map(({ backdrop_path }, i) => (
+    {data.map(({ backdrop_path, title, name }, i) => (
       <Image
+        alt={title || name}
         isBackground
         src={backdrop_path ?? ""}
         key={i}

@@ -1,7 +1,7 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")();
 
 const withAnalyzer = false;
-const withSW = true;
+const withSW = false;
 
 /** @type {(phase: string, defaultConfig: import("next").NextConfig) => Promise<import("next").NextConfig>} */
 module.exports = async () => {
