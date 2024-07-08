@@ -2,13 +2,41 @@
 
 ## Getting Started
 
-First, run the development server:
+Here is several guide to show or test 99 Hotstar
+
+### Requirements
+
+1. `pnpm Install`
+1. Make your [TMDB API key](https://developer.themoviedb.org/reference/intro/getting-started)
+1. Make a file called `.env.local` and put this variable:
+
+```env
+NEXT_PUBLIC_TMDB_BEARER="Bearer {CHANGE WITH YOUR BEARER TOKEN}"
+```
+
+### Running the app
+
+1. Run the development server:
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser, and you will be greeted with a "Welcome to 99 Hotstar" message.
+2. Open [http://localhost:3000](http://localhost:3000) with your browser, and you will be greeted with a "Welcome to 99 Hotstar" message.
+
+### Testing app
+
+1. Run the development server:
+
+```bash
+pnpm dev
+```
+
+2. Run this command on the root project folder:
+
+```
+pnpm exec playwright test
+```
 
 ## Technical Decision
 
@@ -18,6 +46,7 @@ This section is supposed to give readers context of "why" about my technical dec
 2. Data fetching strategy
 3. Asset optimizations and Preloading
 4. Inline CSS and CSS modules
+5. End to end over unit test
 
 ### Chapter 1: ISR, SSR, SSG, or CSR
 
@@ -236,12 +265,14 @@ If you see the source code, you might wonder why several components are using bo
 
 > HTML is like the materials of a building, and CSS is the cement that holds it all together. Without CSS, the structure would just fall apart and look like a mess.
 
-For context, you can read [this
-
-web.dev](https://web.dev/articles/critical-rendering-path/render-blocking-css) article.
+For context, you can read [this web.dev](https://web.dev/articles/critical-rendering-path/render-blocking-css) article.
 
 The idea is to make the "structural" instructions for my HTML to be available as soon as possible. While sometimes your internet might be slow, the pages might not look as expected, just as described in [this web.dev](https://web.dev/articles/critical-rendering-path/render-blocking-css) article.
 
 So my approach is to make the CSS inline with the HTML.
 
 This has proven to help 99 Hotstar perform well in CLS metrics via Lighthouse performance measures.
+
+## End to end over unit test
+
+In this case, I went with E2E testing over unit tests because the components are changing frequently. E2E tests work great for regression testing, making sure everything still works together despite the changes. They save us time from writing and maintaining tons of unit tests while still giving us confidence that the app functions correctly.
