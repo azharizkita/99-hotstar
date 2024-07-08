@@ -112,7 +112,7 @@ Here is a demo when you search something on the search page:
 technique: CSR
 ```
 
-This one obviously needs to be an SSR page because we need to get the context of the user's local storage.
+This one obviously needs to be an CSR page because we need to get the context of the user's local storage.
 
 This decision brought us to a stable and performant page. Here is the result of the Lighthouse test:
 
