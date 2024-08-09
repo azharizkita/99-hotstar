@@ -11,6 +11,7 @@ import {
   contentWrapper,
 } from "./styles";
 import { useGetTVShowDetail } from "@/hooks/use-get-session-details";
+import styles from "./styles.module.css";
 
 const SeasonContent = ({ data }: { data: TVShowDetail }) => {
   const [selectedSeason, setSelectedSeason] = useState<number>(1);
@@ -39,7 +40,7 @@ const SeasonContent = ({ data }: { data: TVShowDetail }) => {
         </select>
       </Flex>
       <Flex style={contentWrapper}>
-        <div style={gridStyle}>
+        <div style={gridStyle} className={styles.episodeCardHolder}>
           {seasonDetail &&
             seasonDetail.episodes.map((episode) => (
               <Card

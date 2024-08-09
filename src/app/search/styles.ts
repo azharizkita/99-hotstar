@@ -10,11 +10,11 @@ export const pageStyles: CSSProperties = {
 
 export const gridStyle: CSSProperties = {
   display: "grid",
+  justifyItems: "center",
+  justifyContent: "center",
   gridTemplateColumns: `repeat(auto-fill, minmax(${spacing(37)}, 1fr))`,
   gap: spacing(4),
   width: "100%",
-  justifyContent: "center",
-  alignItems: "center",
 };
 
 export const searchInputStyle: CSSProperties = {
